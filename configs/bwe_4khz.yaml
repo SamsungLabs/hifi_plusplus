@@ -1,0 +1,44 @@
+exp:
+  name: hifi-plus-bwe-4khz
+  notes: "reproducing HiFi++ for 4khz BWE"
+
+training:
+  trainer: audio2audio_infer
+  device: cuda
+
+data:
+  name: vctk
+  loader: infinite
+  vctk_wavs_dir: "/media/vctk/wav48/"
+  sampling_rate: 16000
+  input_freq: 4000
+  lowpass: "default"
+  num_workers: 8
+
+dataset:
+  vctk:
+    val:
+      dataset_split_file: "VCTK_split/validation.txt"
+      vctk_wavs_dir: ${data.vctk_wavs_dir}
+      sampling_rate: ${data.sampling_rate}
+      input_freq: ${data.input_freq}
+      segment_size: 32768
+      device: ${training.device}
+      lowpass: ${data.lowpass}
+      split: False
+
+loader:
+  infinite:
+    val:
+      batch_size: 1
+      num_workers: 1
+      shuffle: False
+      device: ${training.device}
+      persistent_workers: True
+      prefetch_factor: 1
+      pin_memory: False
+      infinite: False
+
+
+gen:
+  model: a2a_hifi_plus

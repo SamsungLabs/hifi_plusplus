@@ -1,0 +1,40 @@
+exp:
+  name: hifi-plus-denoising
+  notes: "reproducing HiFi++ for speech enhancement"
+
+training:
+  trainer: audio2audio_infer
+  device: cuda
+
+data:
+  name: voicebank
+  loader: infinite
+  voicebank_dir: "/media/vctk/voicebank-demand_v1_full/"
+  sampling_rate: 16000
+  num_workers: 8
+
+dataset:
+  voicebank:
+    val:
+      path_prefix: ${data.voicebank_dir}
+      clean_wavs_dir: "clean_testset_wav"
+      noisy_wavs_dir: "noisy_testset_wav"
+      sampling_rate: ${data.sampling_rate}
+      segment_size: 32768
+      device: ${training.device}
+
+loader:
+  infinite:
+    val:
+      batch_size: 1
+      num_workers: 1
+      shuffle: False
+      device: ${training.device}
+      persistent_workers: True
+      prefetch_factor: 1
+      pin_memory: False
+      infinite: False
+
+
+gen:
+  model: a2a_hifi_plus
