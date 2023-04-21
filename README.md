@@ -42,7 +42,7 @@ We use W&B for logging, so if you want to disable it just put `WANDB_MODE=disabl
 
 ## Checkpoints 
 
-You can find and download checkpoints in Releases tab.
+You can find and download checkpoints in Releases tab. The provided checkpoints deliver better quality than reported in the paper due to longer training time and increased batch size. The WV-MOS (MOSNet) metrics for SE checkpoint should be 4.41. For BWE4khz, BWE2khz and BWE1khz it should be 4.20, 4.05, and 3.88, respectively.
 
 
 ## Configs
