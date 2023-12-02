@@ -8,7 +8,7 @@ Clone the repo and install requirements:
 
 ```
 git clone https://github.com/SamsungLabs/hifi_plusplus.git 
-cd ffc_se
+cd hifi_plusplus
 python -m venv hifi_env
 . hifi_env/bin/activate
 pip install -r requirements.txt
